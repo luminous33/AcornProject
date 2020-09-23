@@ -1,0 +1,47 @@
+9.22
+계획 
+
+	프로젝트 주제 : 증권 자동 매매 및 분석 솔루션 
+
+	사용 툴 : 파이참, 쥬피터 노트북
+
+	1. 시세 DB 구축 및 시세 조회 API 개발
+	
+	2. 장고 웹 서버 구축 및 자동화
+	
+	
+ 장고웹서버 만들고 localhost: 8000 확인
+ 장고 관리자 페이지 만들기  관리자 이름 : CHoi
+	12345678
+	
+ 
+ 테스트앱 만들어보기 ( hello world )
+ Html 코드부분을 템플릿 파일로 작성 하고 동적인 데이터 부분은 
+ 파이썬 코드로 개발 
+ 
+ index 어플 생성하기
+ django.shortcuts의 render() 함수에 템플릿으로 사용할 파일명(index.html)
+ 넘겨주는 역활 
+ 
+ 템플릿 작성 
+ index.html 이라는 테스트 코드 작성후 확인 
+ localhost:8080/index/
+ 
+ 웹으로 계좌 잔고 및 주식 데이터 크롤링한것 화면 구현
+ localhost:8080/balance 어플 만들고 html 기본코드작성
+ 
+ ==================================================
+ 9.23
+ 서버 실행 명령어
+ python manage.py runserver 0.0.0.0:8000
+ 
+ html 매핑하는법 학습 
+ 
+ Investar/Investar/setting.py 애플리케이션 항상 추가해주기 INSTALLED_APPS = []
+ Investar/Investar/urls.py  urlpatterns =[] 부분에 Function views 방식으로 리스트 작성 
+ URL에 따라 실제로 보여줄 뷰를 매핑하는 역활 
+ 각 어플리케이션의 /views.py 을 열어서 render()함수에 템플릿으로 사용할 파일명(보여줄html명.html) 넘겨주기
+ 템플릿 관리는 각 어플리케이션에 디렉토리 temlplates 생성 후 거기에 html 파일생성
+ 정적인 파일 관리법 : 어플리케이션/static/어플명
+ 
+	
