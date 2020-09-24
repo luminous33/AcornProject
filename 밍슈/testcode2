@@ -1,0 +1,29 @@
+# 삼성전자와 마이크로소프트 주가확인
+import sys
+import keyword, calendar
+from pandas_datareader import data as pdr
+import matplotlib.pyplot as plt
+import yfinance as yf
+
+# 해당 년도의 해당월 달력출력
+# print(calendar.month(2020,9))
+
+yf.pdr_override()
+
+sec = pdr.get_data_yahoo('005930.KS', start='2020-05-04')  # 삼성전자
+msft = pdr.get_data_yahoo('MSFT',start='2020-05-04')       # 마이크로소프트
+
+print('삼성전자 : \n')
+display(sec.head(10), sec.tail(10))  # 수정종가(Adj close)와 종가(close)가 일치
+
+print('마이크로소프트 : \n')
+display(msft.head(10), msft.tail(10)) # 수정종가와 종가가 불일치(최근 기준)
+
+# 거래량 제거
+tmp_msft = msft.drop(columns = 'Volume')
+print(tmp_msft.head(), '\n' ,tmp_msft.tail())
+
+plt.plot(sec.index, sec.Close, 'b', label="Samsung Electronics")
+plt.plot(msft.index, msft.Close, 'r--', label='Microsoft')
+plt.legend(loc='best')
+plt.show()
