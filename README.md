@@ -112,3 +112,4 @@ https://www.barchart.com/ 참고
 ## 10-11-2020
 - 웹페이지 구상 수정
 - 플랫폼 실제 구현 
+- 딥러닝 모델 결정 : RNN,LSTM,NLP
