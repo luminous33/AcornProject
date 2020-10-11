@@ -82,3 +82,11 @@ https://www.barchart.com/ 참고
 - 툴 지정
 - 트레이딩 전략 설정
 - 딥러닝 모델 종류 선정
+
+- 웹 구현 예시
+![abc1](https://user-images.githubusercontent.com/63041717/95675742-63400d80-0bf4-11eb-8886-ce95ffef2953.PNG)
+![abc2](https://user-images.githubusercontent.com/63041717/95675743-63d8a400-0bf4-11eb-9d17-0af210dda1cd.PNG)
+![abc3](https://user-images.githubusercontent.com/63041717/95675744-6509d100-0bf4-11eb-9560-d9b8bdeaef23.PNG)
+![abc4](https://user-images.githubusercontent.com/63041717/95675745-65a26780-0bf4-11eb-9e57-7a8783939084.PNG)
+![abc5](https://user-images.githubusercontent.com/63041717/95675746-65a26780-0bf4-11eb-8627-bd839faa7924.PNG)
+![abc6](https://user-images.githubusercontent.com/63041717/95675740-62a77700-0bf4-11eb-8bb2-6e7e96155865.PNG)
