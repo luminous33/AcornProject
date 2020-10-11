@@ -20,4 +20,4 @@
 05. 9장 딥러닝
 
 
-![abc](./C:\Users\ZENBOOK\mywork\htmlwork\img\abc.jpg)
+![abc](./C:/Users/ZENBOOK/mywork/htmlwork/img/abc.jpg)
