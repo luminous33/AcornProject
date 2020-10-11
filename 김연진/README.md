@@ -19,4 +19,3 @@
 04. 6장테스트
 05. 9장 딥러닝
 
-![abc](https://user-images.githubusercontent.com/63041717/95675623-9fbf3980-0bf3-11eb-820e-a7e25d0b12a2.jpg)
