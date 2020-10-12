@@ -111,5 +111,11 @@ https://www.barchart.com/ 참고
 
 ## 10-11-2020
 - 웹페이지 구상 수정
+![abc1](https://user-images.githubusercontent.com/63041717/95695099-6a0c6600-0c70-11eb-9a83-a411129fea2f.PNG)
+![abc2](https://user-images.githubusercontent.com/63041717/95695102-6b3d9300-0c70-11eb-9f8b-52a684d1a969.PNG)
+![abc3](https://user-images.githubusercontent.com/63041717/95695094-68db3900-0c70-11eb-8166-7438c1d48e03.PNG)
+![abc4](https://user-images.githubusercontent.com/63041717/95695101-6aa4fc80-0c70-11eb-8a37-90aead947d13.PNG)
+![abc5](https://user-images.githubusercontent.com/63041717/95695087-67aa0c00-0c70-11eb-8fce-2aa3d09025fd.PNG)
+![abc6](https://user-images.githubusercontent.com/63041717/95695098-68db3900-0c70-11eb-9cdd-8d08923bc963.PNG)
 - 플랫폼 실제 구현 
 - 딥러닝 모델 결정 : RNN,LSTM,NLP
