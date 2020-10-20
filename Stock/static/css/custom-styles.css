@@ -533,8 +533,9 @@ ul.dropdown-menu.dropdown-messages li a div {
 }
 .dashboard-cards .card-action strong{
 	font-weight:700;
-	font-size: 16px;
+	font-size: 25px;
 	color: rgba(255, 255, 255, 0.65);
+	text-align: center;
 }
 .donutpad {
     padding: 32px 0;
