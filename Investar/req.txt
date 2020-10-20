@@ -1,13 +1,6 @@
 absl-py==0.9.0
 alabaster==0.7.12
 altgraph==0.17
-anaconda-client==1.7.2
-anaconda-navigator==1.9.12
-anaconda-project==0.8.3
-argh @ file:///home/conda/feedstock_root/build_artifacts/argh_1595627874344/work
-argon2-cffi @ file:///D:/bld/argon2-cffi_1596630110014/work
-asgiref==3.2.7
-asn1crypto @ file:///home/conda/feedstock_root/build_artifacts/asn1crypto_1595949944546/work
 astor==0.8.1
 astroid @ file:///D:/bld/astroid_1591645286655/work
 astropy==4.0.1.post1
