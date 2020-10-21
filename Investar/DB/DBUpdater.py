@@ -141,7 +141,7 @@ class DBUpdater:
                 pages_to_fetch = config['pages_to_fetch']
         except FileNotFoundError:
             with open('config.json', 'w') as out_file:
-                pages_to_fetch = 50 
+                pages_to_fetch = 3 
                 config = {'pages_to_fetch': 1}
                 json.dump(config, out_file)
         self.update_daily_price(pages_to_fetch)
