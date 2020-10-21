@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import pandas as pd
 import pymysql
 from datetime import datetime
@@ -88,6 +87,5 @@ class MarketDB:
               f" and date >= '{start_date}' and date <= '{end_date}'"
         df = pd.read_sql(sql, self.conn)
         df.index = df['date']
-
-
+        
         return df
