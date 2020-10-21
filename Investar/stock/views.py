@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import Analyzer
 from .models import CompanyInfo
 from .models import DailyPrice
+from .models import Merge
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import DualMomentum 
@@ -26,12 +27,25 @@ def homepage(request):
         kosdakChange = html.find('span',id='KOSDAQ_change').text
         kospi200 = html.find('span',id='KPI200_now').text
         kospi200Change = html.find('span',id='KPI200_change').text
-    color="blue"
+    if kospiChange.find('+') > 0:
+        color1 = "red"
+    else:
+        color1 = "blue"
+
+    if kosdakChange.find('+') > 0:
+        color2 = "red"
+    else:
+        color2 = "blue"
+
+    if kospi200Change.find('+') > 0:
+        color3 = "red"
+    else:
+        color3 = "blue"
     
     
 #듀얼 부분
     dm = DualMomentum.DualMomentum()
-    rm = dm.get_rltv_momentum('2020-02-01','2020-4-31',10)
+    rm = dm.get_rltv_momentum('2020-02-01','2020-4-31',50)
     json_records = rm.reset_index().to_json(orient ='records') 
     datarm = [] 
     datarm = json.loads(json_records) 
@@ -43,7 +57,9 @@ def homepage(request):
     
 #최종 context 부분
     context={
-        'color':color,
+        'color1':color1,
+        'color2': color2,
+        'color3': color3,
         'kospi':kospi,
         'kospiChange':kospiChange,
         'kosdak':kosdak,
@@ -68,8 +84,9 @@ def introduce(request):
     
 def trading(request):
     name=request.GET['name']
+    
     mk = Analyzer.MarketDB()
-    raw_df = mk.get_daily_price(name, '2018-05-04', '2020-09-01')
+    raw_df = mk.get_daily_price(name, '2019-03-01', '2020-09-01')
 
     window_size = 10 
     data_size = 5
@@ -132,9 +149,9 @@ def trading(request):
 
     # Visualising the results
     plt.figure()
-    plt.plot(test_y, color='red', label='real SEC stock price')
-    plt.plot(pred_y, color='blue', label='predicted SEC stock price')
-    plt.title('SEC stock price prediction')
+    plt.plot(test_y, color='red', label='real stock price')
+    plt.plot(pred_y, color='blue', label='predicted  stock price')
+    plt.title('stock price prediction')
     plt.xlabel('time')
     plt.ylabel('stock price')
     plt.legend()
@@ -149,8 +166,9 @@ def trading(request):
     
 def bol2(request):
     name=request.GET['name']
+    startdate=request.GET['startdate']
     mk = Analyzer.MarketDB()
-    df = mk.get_daily_price(name, '2018-11-01')
+    df = mk.get_daily_price(name,startdate)
       
     df['MA20'] = df['close'].rolling(window=20).mean() 
     df['stddev'] = df['close'].rolling(window=20).std() 
@@ -164,7 +182,7 @@ def bol2(request):
 
     plt.figure(figsize=(9, 9))
     plt.subplot(3, 1, 1)
-    plt.title('SK Hynix Bollinger Band(20 day, 2 std) - Reversals')
+    plt.title('Bollinger Band(20 day, 2 std) - Reversals')
     plt.plot(df.index, df['close'], 'b', label='Close')
     plt.plot(df.index, df['upper'], 'r--', label ='Upper band')
     plt.plot(df.index, df['MA20'], 'k--', label='Moving average 20')
@@ -194,33 +212,55 @@ def bol2(request):
     
 def triple(request):
     name=request.GET['name']
+    startdate=request.GET['startdate']
     mk = Analyzer.MarketDB()
-    df = mk.get_daily_price('name', '2018-01-01')
-
+    df = mk.get_daily_price(name,  startdate)
+    
     ema60 = df.close.ewm(span=60).mean()
-    ema130 = df.close.ewm(span=130).mean() 
+    ema130 = df.close.ewm(span=130).mean()
     macd = ema60 - ema130
-    signal = macd.ewm(span=45).mean() 
+    signal = macd.ewm(span=45).mean()
     macdhist = macd - signal
+    df = df.assign(ema130=ema130, ema60=ema60, macd=macd, signal=signal, macdhist=macdhist).dropna()
 
-    df = df.assign(ema130=ema130, ema60=ema60, macd=macd, signal=signal,
-        macdhist=macdhist).dropna()
     df['number'] = df.index.map(mdates.date2num)
     ohlc = df[['number','open','high','low','close']]
 
-    ndays_high = df.high.rolling(window=14, min_periods=1).max()      # ①
-    ndays_low = df.low.rolling(window=14, min_periods=1).min()        # ②
-    fast_k = (df.close - ndays_low) / (ndays_high - ndays_low) * 100  # ③
-    slow_d= fast_k.rolling(window=3).mean()                           # ④
-    df = df.assign(fast_k=fast_k, slow_d=slow_d).dropna()             # ⑤
+    ndays_high = df.high.rolling(window=14, min_periods=1).max()
+    ndays_low = df.low.rolling(window=14, min_periods=1).min()
 
-    plt.figure(figsize=(9, 7))
-    p1 = plt.subplot(2, 1, 1)
-    plt.title('Triple Screen Trading - Second Screen')
+    fast_k = (df.close - ndays_low) / (ndays_high - ndays_low) * 100
+    slow_d = fast_k.rolling(window=3).mean()
+    df = df.assign(fast_k=fast_k, slow_d=slow_d).dropna()
+
+    plt.figure(figsize=(9, 9))
+    p1 = plt.subplot(3, 1, 1)
+    plt.title('Triple Screen Trading')
     plt.grid(True)
     candlestick_ohlc(p1, ohlc.values, width=.6, colorup='red', colordown='blue')
     p1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
     plt.plot(df.number, df['ema130'], color='c', label='EMA130')
+    for i in range(1, len(df.close)):
+        if df.ema130.values[i-1] < df.ema130.values[i] and df.slow_d.values[i-1] >= 20 and df.slow_d.values[i] < 20:
+            plt.plot(df.number.values[i], 250000, 'r^') 
+        elif df.ema130.values[i-1] > df.ema130.values[i] and df.slow_d.values[i-1] <= 80 and df.slow_d.values[i] > 80:
+            plt.plot(df.number.values[i], 250000, 'bv') 
+    plt.legend(loc='best')
+
+    p2 = plt.subplot(3, 1, 2)
+    plt.grid(True)
+    p2.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    plt.bar(df.number, df['macdhist'], color='m', label='MACD-Hist')
+    plt.plot(df.number, df['macd'], color='b', label='MACD')
+    plt.plot(df.number, df['signal'], 'g--', label='MACD-Signal')
+    plt.legend(loc='best')
+
+    p3 = plt.subplot(3, 1, 3)
+    plt.grid(True)
+    p3.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    plt.plot(df.number, df['fast_k'], color='c', label='%K')
+    plt.plot(df.number, df['slow_d'], color='k', label='%D')
+    plt.yticks([0, 20, 80, 100])
     plt.legend(loc='best')
     fig = plt.gcf()
     #convert graph into dtring buffer and then we convert 64 bit code into image
@@ -233,8 +273,7 @@ def triple(request):
 
 #주식검색    
 def search(request):
-    prices = DailyPrice.objects.filter(date="2020-09-01")
-    context = {'prices':prices}
-
+    merges = Merge.objects.filter(date="2020-09-01").values('company', 'code', 'date', 'open', 'high', 'low', 'close', 'diff', 'volume')
+    context = {'merges':merges}
     return render(request, 'search.html', context)
     
