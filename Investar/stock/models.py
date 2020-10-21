@@ -8,6 +8,22 @@
 from django.db import models
 
 
+class Merge(models.Model):
+    company = models.CharField(max_length=40, blank=True, null=True)
+    code = models.CharField(max_length=20)
+    date = models.DateField()
+    open = models.BigIntegerField(blank=True, null=True)
+    high = models.BigIntegerField(blank=True, null=True)
+    low = models.BigIntegerField(blank=True, null=True)
+    close = models.BigIntegerField(blank=True, null=True)
+    diff = models.BigIntegerField(blank=True, null=True)
+    volume = models.BigIntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'MERGE'
+
+
 class CompanyInfo(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     company = models.CharField(max_length=40, blank=True, null=True)
