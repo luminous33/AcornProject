@@ -82,7 +82,7 @@ class DualMomentum:
         """
         stockList = list(rltv_momentum['code'])        
         connection = pymysql.connect(host='localhost', port=3306, 
-            db='INVESTAR', user='root', passwd='1234', autocommit=True)
+            db='investar', user='root', passwd='1111', autocommit=True)
         cursor = connection.cursor()
 
 
@@ -139,4 +139,5 @@ class DualMomentum:
         print(df)
         print(f"\nAbasolute momentum ({start_date} ~ {end_date}) : "\
             f"{df['returns'].mean():.2f}%")
-        return
+        
+        return df
