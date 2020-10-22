@@ -19,6 +19,7 @@ from Stock.views import homepage, introduce, introbol, introdeep, introdual, int
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', homepage),
     path('homepage/', homepage),
     path('introduce', introduce),
     path('introbol', introbol),
