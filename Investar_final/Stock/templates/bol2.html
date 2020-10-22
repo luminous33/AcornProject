@@ -50,6 +50,10 @@
           font-family: Noto Sans KR;
           font-weight: 700;
         }
+        h5 {
+          font-family: Noto Sans KR;
+          font-weight: 700;
+        }
 	</style>
 </head>
 
@@ -84,14 +88,14 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu waves-effect waves-dark" href="homepage"><i class="fa fa-dashboard"></i> 홈</a>
+                        <a class="waves-effect waves-dark" href="homepage"><i class="fa fa-dashboard"></i> 홈</a>
                     </li>
                     <li>
                         <a href="/introduce" class="waves-effect waves-dark"><i class="fa fa-desktop"></i> 주식싹쓰리 소개</a>
                     </li>
 
 					<li>
-                        <a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i>트레이딩 전략<span class="fa arrow"></span></a>
+                        <a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> 트레이딩 전략<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                         <a href="/introbol" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 볼린저 매매</a>
@@ -100,7 +104,7 @@
                         <a href="/introtriple" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 삼중창 매매</a>
                     </li>
 							<li>
-                                <a href="/introdual" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i>듀얼모멘텀</a>
+                                <a href="/introdual" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 듀얼모멘텀</a>
                             </li>
                         </ul>
                     </li>
@@ -117,15 +121,17 @@
         <!-- /. NAV SIDE  -->
       
 		<div id="page-wrapper">
-        <div class="header">
-            <h3>매매기법 | - 볼린저 밴드</h3>
-            <img src=""
-
+        <div class="header" style="padding-top: 20px;">
+            <h3 style="padding-bottom: 10px;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;매매기법 | - 볼린저 밴드
+                <a href="introbol"><img src="/static/img/question.png" width="30px" height="30px"></a>
+            </h3>
+            <h5 style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"최적의 매수 매도 타이밍을 알려드립니다!"</h5><br>
 
             <img src="/static/img/bol_intro.png" width="100%" height="100%">
-                        <h1 class="page-header">
-                            트레이딩 전략 볼린저 밴드 종목명 : {{name}}
-                        </h1>
+                        <h3 class="page-header">
+                            검색한 종목명 : {{name}}
+                        </h3>
       </div>
              <div id="page-inner">
 
@@ -134,7 +140,7 @@
                     <div class="col-md-6">
                     <div class="card">
                         <div class="card-action">
-                            <h3>반전 매매 기법</h3>
+                            <h5>반전 매매 기법</h5>
 
                         </div>
                          <div class="card-content">
@@ -150,7 +156,7 @@
                     <div class="card">
                     <div class="card">
                         <div class="card-action">
-                            <h3>추세 추종 매매 기법</h3>
+                            <h5>추세 추종 매매 기법</h5>
 
                         </div>
                          <div class="card-content">

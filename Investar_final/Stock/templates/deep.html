@@ -87,14 +87,14 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu waves-effect waves-dark" href="homepage"><i class="fa fa-dashboard"></i> 홈</a>
+                        <a class="waves-effect waves-dark" href="homepage"><i class="fa fa-dashboard"></i> 홈</a>
                     </li>
                     <li>
                         <a href="/introduce" class="waves-effect waves-dark"><i class="fa fa-desktop"></i> 주식싹쓰리 소개</a>
                     </li>
 
 					<li>
-                        <a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i>트레이딩 전략<span class="fa arrow"></span></a>
+                        <a href="#" class="active-menu waves-effect waves-dark"><i class="fa fa-sitemap"></i> 트레이딩 전략<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                         <a href="/introbol" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 볼린저 매매</a>
@@ -103,7 +103,7 @@
                         <a href="/introtriple" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 삼중창 매매</a>
                     </li>
 							<li>
-                                <a href="/introdual" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i>듀얼모멘텀</a>
+                                <a href="/introdual" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 듀얼모멘텀</a>
                             </li>
                         </ul>
                     </li>
@@ -139,7 +139,7 @@
 							{% if data %}
                             <img src="data:image/png;base64,{{ data }}" alt="" height="400", width="500", align="middle">
 						   {% endif %}
-
+                             <h3>현재 주가는 {{price}}원입니다.</h3>
                              <h3>내일의 주가는 {{price}}원으로 예측됩니다!</h3>
 						   <div class="clearBoth"><br/></div>
 						    

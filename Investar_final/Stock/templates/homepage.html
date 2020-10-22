@@ -92,16 +92,16 @@
                     </li>
 
 					<li>
-                        <a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i>트레이딩 전략<span class="fa arrow"></span></a>
+                        <a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> 트레이딩 전략<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                         <a href="/introbol" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 볼린저 매매</a>
 							</li>
                             <li>
                         <a href="/introtriple" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 삼중창 매매</a>
-                    </li>d
+                    </li>
 							<li>
-                                <a href="/introdual" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i>듀얼모멘텀</a>
+                                <a href="/introdual" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 듀얼모멘텀</a>
                             </li>
                         </ul>
                     </li>
@@ -123,7 +123,6 @@
                             Home
                         </h1> -->
 				<img src="/static/img/banner.png" width="100%" height="100%">
-
 
 		</div>
              <div id="page-inner">
@@ -202,11 +201,11 @@
                 <div class="col-md-12">
                     <div class="card" style="padding-left: 30px; padding-top: 10px;">
                         종목수 :
-                        <input type="text" placeholder="종목수" id="dualcount" style="width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="dualcount" placeholder="              20" style="width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         시작일자 :
-                        <input type="text" placeholder="시작일자" id="dualstart" style="width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="dualstart" placeholder="       ex) 2020-01-01" style="width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         종료일자 :
-                        <input type="text" placeholder="종료일자" id="dualend" style="width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="dualend" placeholder="       ex) 2020-04-01" style="width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                         <button type="button" class="btn btn-danger" onclick="redirect3();" style="margin-left: 20px;">검색</button>
                     </div>
@@ -219,7 +218,7 @@
                         <div class="card-action">
                              상대모멘텀
                         </div>
-<!--                        <h6> {{dualstart}} ~ {{dualend}} </h6>-->
+                        <h6 style="text-align: right; margin-right: 20px">기간 : {{dualstart}} ~ {{dualend}} </h6>
 
                         <div class="card-content">
                             <div class="table-responsive">
@@ -262,7 +261,7 @@
                         <div class="card-action">
                              절대모멘텀
                         </div>
-<!--                        <p>{{dualstart2}} ~ {{dualend2}}</p>-->
+                        <h6 style="text-align: right; margin-right: 20px">기간 : {{dualstart2}} ~ {{dualend2}}</h6>
                         <div class="card-content">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example2">

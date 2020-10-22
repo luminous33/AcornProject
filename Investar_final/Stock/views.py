@@ -46,7 +46,7 @@ class DualMomentum:
             - stock_count : 상대 모멘텀을 구할 종목수
         """
         connection = pymysql.connect(host='localhost', port=3306,
-                                     db='investar', user='root', passwd='1111', autocommit=True)
+                                     db='INVESTAR', user='root', passwd='1111', autocommit=True)
         cursor = connection.cursor()
 
         # 사용자가 입력한 시작일자를 DB에서 조회되는 일자로 보정
@@ -109,7 +109,7 @@ class DualMomentum:
         """
         stockList = list(rltv_momentum['code'])
         connection = pymysql.connect(host='localhost', port=3306,
-                                     db='investar', user='root', passwd='1111', autocommit=True)
+                                     db='INVESTAR', user='root', passwd='1111', autocommit=True)
         cursor = connection.cursor()
 
         # 사용자가 입력한 매수일을 DB에서 조회되는 일자로 변경
@@ -224,6 +224,42 @@ def homepage(request):
         json_records = rm.reset_index().to_json(orient='records')
         datarm = []
         datarm = json.loads(json_records)
+        datarm.sort(key=returns, reverse=True)
+
+        # 절대모멘텀 시작일자
+        dualstart2 = dualend
+
+        dualend2 = datetime.strptime(dualstart2, '%Y-%m-%d')
+        dualend2 = dualend2 + relativedelta(months=3)
+        dualend2 = str(dualend2)
+
+        am = dm.get_abs_momentum(rm, dualstart2, dualend2)
+        json_records = am.reset_index().to_json(orient='records')
+        dataam = []
+        dataam = json.loads(json_records)
+        dataam.sort(key=returns, reverse=True)
+
+        context['d'] = datarm
+        context['d2'] = dataam
+        context['dualstart'] = str(dualstart)
+        context['dualend'] = str(dualend)
+        context['dualstart2'] = str(dualstart2)
+        context['dualend2'] = str(dualend2[:-9])
+
+        return render(request, 'homepage.html', context)
+
+    except:
+
+        # default 값
+        dualcount = 10
+        dualstart = '2020-04-01'
+        dualend = '2020-06-30'
+
+        dm = DualMomentum()
+        rm = dm.get_rltv_momentum(dualstart, dualend, dualcount)
+        json_records = rm.reset_index().to_json(orient='records')
+        datarm = []
+        datarm = json.loads(json_records)
 
         # 절대모멘텀 시작일자
         dualstart2 = dualend
@@ -242,36 +278,7 @@ def homepage(request):
         context['dualstart'] = str(dualstart)
         context['dualend'] = str(dualend)
         context['dualstart2'] = str(dualstart2)
-        context['dualend2'] = str(dualend2)
-
-        return render(request, 'homepage.html', context)
-
-    except:
-
-        # default 값
-        dualcount = 10
-        dualstart = '2020-04-01'
-        dualend = '2020-06-30'
-
-        dm = DualMomentum()
-        rm = dm.get_rltv_momentum(dualstart, dualend, dualcount)
-        json_records = rm.reset_index().to_json(orient='records')
-        datarm = []
-        datarm = json.loads(json_records)
-
-        dualstart2 = dualend
-
-        dualend = datetime.strptime(dualstart2, '%Y-%m-%d')
-        dualend = dualend + relativedelta(months=3)
-        dualend = str(dualend)
-
-        am = dm.get_abs_momentum(rm, dualstart2, dualend)
-        json_records = am.reset_index().to_json(orient='records')
-        dataam = []
-        dataam = json.loads(json_records)
-
-        context['d'] = datarm
-        context['d2'] = dataam
+        context['dualend2'] = str(dualend2[:-9])
 
         return render(request, 'homepage.html', context)
 
@@ -287,6 +294,7 @@ def deep(request):
 
     mk = Analyzer.MarketDB()
     raw_df = mk.get_daily_price(name, '2019-03-01', '2020-09-01')
+
 
     window_size = 10
     data_size = 5
@@ -383,6 +391,11 @@ def bol2(request):
         plt.plot(df.index, df['MA20'], 'k--', label='Moving average 20')
         plt.plot(df.index, df['lower'], 'c--', label='Lower band')
         plt.fill_between(df.index, df['upper'], df['lower'], color='0.9')
+        for i in range(0, len(df.close)):
+            if df.PB.values[i] < 0.05 and df.IIP21.values[i] > 0:
+                plt.plot(df.index.values[i], df.close.values[i], 'r^')
+            elif df.PB.values[i] > 0.95 and df.IIP21.values[i] < 0:
+                plt.plot(df.index.values[i], df.close.values[i], 'bv')
 
         plt.legend(loc='best')
         plt.subplot(3, 1, 2)
@@ -686,7 +699,7 @@ def triple(request):
 
 # 주식검색
 def search(request):
-    merges = Merge.objects.filter(date="2020-09-01").values('company', 'code', 'date', 'open', 'high', 'low', 'close',
+    merges = Merge.objects.filter(date="2020-10-21").values('company', 'code', 'date', 'open', 'high', 'low', 'close',
                                                             'diff', 'volume')
     context = {'merges': merges}
     return render(request, 'search.html', context)
