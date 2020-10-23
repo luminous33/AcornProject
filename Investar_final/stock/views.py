@@ -21,6 +21,7 @@ import pymysql
 from datetime import datetime
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
+import re
 
 def introbol(request):
     return render(request, 'introbol.html')
@@ -46,7 +47,7 @@ class DualMomentum:
             - stock_count : 상대 모멘텀을 구할 종목수
         """
         connection = pymysql.connect(host='localhost', port=3306,
-                                     db='investar', user='root', passwd='1111', autocommit=True)
+                                     db='INVESTAR', user='root', passwd='1111', autocommit=True)
         cursor = connection.cursor()
 
         # 사용자가 입력한 시작일자를 DB에서 조회되는 일자로 보정
@@ -109,7 +110,7 @@ class DualMomentum:
         """
         stockList = list(rltv_momentum['code'])
         connection = pymysql.connect(host='localhost', port=3306,
-                                     db='investar', user='root', passwd='1111', autocommit=True)
+                                     db='INVESTAR', user='root', passwd='1111', autocommit=True)
         cursor = connection.cursor()
 
         # 사용자가 입력한 매수일을 DB에서 조회되는 일자로 변경
@@ -224,7 +225,6 @@ def homepage(request):
         json_records = rm.reset_index().to_json(orient='records')
         datarm = []
         datarm = json.loads(json_records)
-        datarm.sort(key=returns, reverse=True)
 
         # 절대모멘텀 시작일자
         dualstart2 = dualend
@@ -237,7 +237,6 @@ def homepage(request):
         json_records = am.reset_index().to_json(orient='records')
         dataam = []
         dataam = json.loads(json_records)
-        dataam.sort(key=returns, reverse=True)
 
         context['d'] = datarm
         context['d2'] = dataam
@@ -292,9 +291,13 @@ def introduce(request):
 def deep(request):
     name = request.GET['name']
 
+    cur_price = Merge.objects.filter(date="2020-10-21", company=name).values("close")
+    # cur_price = cur_price[0]
+    cur_price = str(cur_price)
+    cur_price = int(re.findall("\d+", cur_price)[0])
+
     mk = Analyzer.MarketDB()
     raw_df = mk.get_daily_price(name, '2019-03-01', '2020-09-01')
-
 
     window_size = 10
     data_size = 5
@@ -361,8 +364,10 @@ def deep(request):
     buf.seek(0)
     string = base64.b64encode(buf.read())
     uri = urllib.parse.quote(string)
-    price = raw_df.close[-1] * pred_y[-1] / dfy.close[-1]
-    return render(request, 'deep.html', {'data': uri, 'name':name,'price': price})
+    price = int(raw_df.close[-1] * pred_y[-1] / dfy.close[-1])
+
+    # context = {'data': uri, 'name': name, 'price': price, 'cur_price': cur_price}
+    return render(request, 'deep.html', {'data': uri, 'name': name, 'price': price, 'cur_price': cur_price})
 
 
 def bol2(request):
@@ -494,6 +499,12 @@ def bol2(request):
         plt.plot(df.index, df['MA20'], 'k--', label='Moving average 20')
         plt.plot(df.index, df['lower'], 'c--', label='Lower band')
         plt.fill_between(df.index, df['upper'], df['lower'], color='0.9')
+        for i in range(0, len(df.close)):
+            if df.PB.values[i] < 0.05 and df.IIP21.values[i] > 0:
+                plt.plot(df.index.values[i], df.close.values[i], 'r^')
+            elif df.PB.values[i] > 0.95 and df.IIP21.values[i] < 0:
+                plt.plot(df.index.values[i], df.close.values[i], 'bv')
+
 
         plt.legend(loc='best')
         plt.subplot(3, 1, 2)
@@ -529,7 +540,7 @@ def bol2(request):
         df['MFI10'] = 100 - 100 / (1 + df['MFR'])
         df = df[19:]
 
-        plt.figure(figsize=(9, 8))
+        plt.figure(figsize=(9, 9))
         plt.subplot(2, 1, 1)
         plt.title('Bollinger Band(20 day, 2 std) - Trend Following')
         plt.plot(df.index, df['close'], color='#0000ff', label='Close')

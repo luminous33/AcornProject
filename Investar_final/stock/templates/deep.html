@@ -54,6 +54,11 @@
           font-family: Noto Sans KR;
           font-weight: 700;
         }
+        h4 {
+          font-family: Noto Sans KR;
+          font-weight: 500;
+          text-align:center;
+        }
 	</style>
 </head>
 
@@ -92,7 +97,6 @@
                     <li>
                         <a href="/introduce" class="waves-effect waves-dark"><i class="fa fa-desktop"></i> 주식싹쓰리 소개</a>
                     </li>
-
 					<li>
                         <a href="#" class="active-menu waves-effect waves-dark"><i class="fa fa-sitemap"></i> 트레이딩 전략<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -107,45 +111,36 @@
                             </li>
                         </ul>
                     </li>
-
 					<li>
                         <a href="/search" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o "></i> 주식시세 검색</a>
                     </li>
-
                 </ul>
-
             </div>
-
         </nav>
         <!-- /. NAV SIDE  -->
       
 		<div id="page-wrapper">
-		  <div class="header"> 
-                        <h1 class="page-header">
-                            딥러닝을 통한 주가예측 AI
-                        </h1>								
-		</div>
-             <div id="page-inner"> 
-			
-			  <div class="row">
-                    
-                    <div class="col-md-12">
-                    <div class="card">
+              <div class="header">
+                    <h1 class="page-header">
+                        | 딥러닝을 통한 주가예측 AI
+                    </h1>
+              </div>
+              <div id="page-inner">
+			        <div class="row">
+                     <div class="col-md-12">
+                         <div class="card">
 
-                         <div class="card-content">
+                             <div class="card-content">
 
-                             <h3>검색한 종목명 : {{name}}</h3><br>
+                                 <h3>검색한 종목명 : {{name}}</h3><br>
 
-							{% if data %}
-                            <img src="data:image/png;base64,{{ data }}" alt="" height="400", width="500", align="middle">
-						   {% endif %}
-                             <h3>현재 주가는 {{price}}원입니다.</h3>
-                             <h3>내일의 주가는 {{price}}원으로 예측됩니다!</h3>
-						   <div class="clearBoth"><br/></div>
-						    
-						 </div>
-						 </div>
+                                 {% if data %}
+                                 <img src="data:image/png;base64,{{ data }}" alt="" height="400", width="500", align="middle">
+                                 {% endif %}
 
+                                 <h4>현재 주가는 {{cur_price}}원입니다.</h4>
+                                 <h4>내일의 주가는 {{price}}원으로 예측됩니다!</h4>
+                     </div>
 				</div>
              <!-- /. PAGE INNER  -->
             </div>

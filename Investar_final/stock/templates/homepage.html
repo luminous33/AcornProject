@@ -44,7 +44,7 @@
         }
         p {
           font-family: Noto Sans KR;
-          font-weight: 500;
+          font-weight: 600;
          }
 
         body {
@@ -128,7 +128,7 @@
              <div id="page-inner">
 			 <div class = "atag" style="height: 26px; width: 180px; border:1px solid black; border-radius: 5px 5px 5px 5px; background-color: #ffffff; float: right;">
                   <img src="/static/img/naver_logo.png" width=20px height=20px>
-                  <a href="https://finance.naver.com/" target="_blank"> 네이버금융바로가기</a><br>
+                  <a href="https://finance.naver.com/" target="_blank">네이버금융바로가기</a><br>
                </div>
                 <h3>
                   <img src="/static/img/logo_icon.png" width=30px height=30px>
@@ -196,16 +196,17 @@
 			   <h3>
 					<img src="/static/img/logo_icon.png" width=30px height=30px>
 					    듀얼 모멘텀
+                    <a href="introdual"><img src="/static/img/question.png" width="30px" height="30px"></a>
 				</h3>
 				<br>
                 <div class="col-md-12">
                     <div class="card" style="padding-left: 30px; padding-top: 10px;">
                         종목수 :
-                        <input type="text" id="dualcount" placeholder="              20" style="width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="dualcount" placeholder="20" style="width:150px; text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         시작일자 :
-                        <input type="text" id="dualstart" placeholder="       ex) 2020-01-01" style="width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="dualstart" placeholder="ex) 2020-01-01" style="width:150px; text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         종료일자 :
-                        <input type="text" id="dualend" placeholder="       ex) 2020-04-01" style="width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="dualend" placeholder="ex) 2020-04-01" style="width:150px; text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                         <button type="button" class="btn btn-danger" onclick="redirect3();" style="margin-left: 20px;">검색</button>
                     </div>
@@ -216,9 +217,9 @@
                     <!-- Advanced Tables -->
                     <div class="card">
                         <div class="card-action">
-                             상대모멘텀
+                             <p style="text-align: center; font-size:1.5em;">상대모멘텀</p>
                         </div>
-                        <h6 style="text-align: right; margin-right: 20px">기간 : {{dualstart}} ~ {{dualend}} </h6>
+                        <h6 style="text-align: right; margin-right: 20px; color: DimGray;">기간 : {{dualstart}} ~ {{dualend}} </h6>
 
                         <div class="card-content">
                             <div class="table-responsive">
@@ -259,9 +260,9 @@
                     <!-- Advanced Tables -->
                     <div class="card">
                         <div class="card-action">
-                             절대모멘텀
+                             <p style="text-align: center; font-size:1.5em;">절대모멘텀</p>
                         </div>
-                        <h6 style="text-align: right; margin-right: 20px">기간 : {{dualstart2}} ~ {{dualend2}}</h6>
+                        <h6 style="text-align: right; margin-right: 20px; color: DimGray;">기간 : {{dualstart2}} ~ {{dualend2}}</h6>
                         <div class="card-content">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example2">
@@ -295,9 +296,7 @@
                     </div>
                     <!--End Advanced Tables -->
                 </div>
-
             </div>
-
 			    <h3>
 					<img src="/static/img/logo_icon.png" width=30px height=30px>
 					    종목별 트레이딩 전략 분석
@@ -308,7 +307,7 @@
 				<div class="col-md-12">
                     <div class="card">
                         <div class="card-action" style='height:auto'>
-						 <form style="margin-bottom: 10px">
+						 <form>
 						  주식명 :
 						  <input type="text" placeholder="종목명 또는 회사명을 입력해주세요." id="stockname1">
 						  시작일자 :
@@ -320,21 +319,18 @@
                          </form>
 						</div>
 
-						 </div>
+
 				</div>
-                <br>
-                <h3><br>
+                </div>
+                <h3>
 					<img src="/static/img/logo_icon.png" width=30px height=30px>
 					    딥러닝 주가 예측
 				</h3>
 				<br>
-
-
 <!--				<div class="row">-->
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-action" style='height:auto'>
-
                              <form>
                               주식명 :
                               <input type="text" placeholder="종목명 또는 회사명을 입력해주세요." id="stockname2">
@@ -369,6 +365,11 @@
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
             });
+
+<!--            $(document).ready(function () {-->
+
+<!--                dataTables-example.fnSort( [ [4,'asc'] );-->
+<!--            });-->
 
 			$(document).ready(function () {
                 $('#dataTables-example2').dataTable();

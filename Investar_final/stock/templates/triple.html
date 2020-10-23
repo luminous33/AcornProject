@@ -17,18 +17,43 @@
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="static/js/Lightweight-Chart/cssCharts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
 	<style>
 		.logo-header {
-			
+
 			overflow: hidden;
 		}
 		.logo-header > img {
 			width: 200px;
-			height: 100px;
+			height: 80px;
 			position: absolute;
 			left: 30px;
-			top: -17px;
+			top: -8px;
 		}
+		.atag{
+         text-align:center;
+        }
+        a {
+          font-family: Noto Sans KR;
+          font-weight: 700;
+        }
+        h3 {
+          font-family: Noto Sans KR;
+          font-weight: 700;
+        }
+        p {
+          font-family: Noto Sans KR;
+          font-weight: 600;
+        }
+        h1 {
+          font-family: Noto Sans KR;
+          font-weight: 700;
+        }
+        h5 {
+          font-family: Noto Sans KR;
+          font-weight: 700;
+        }
 	</style>
 </head>
 
@@ -96,10 +121,11 @@
         <!-- /. NAV SIDE  -->
       
 		<div id="page-wrapper">
-		  <div class="header"> 
-                        <h1 class="page-header">
-                            트레이딩 전략 삼중창 매매 
-                        </h1>								
+		  <div class="header" style="padding-top: 20px;">
+                    <h3 style="padding-bottom: 10px;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;매매기법 | - 삼중창 매매
+                        <a href="introtriple"><img src="/static/img/question.png" width="30px" height="30px"></a>
+                    </h3>
 		</div>
              <div id="page-inner"> 
 			
@@ -107,20 +133,15 @@
                     
                     <div class="col-md-12">
                     <div class="card">
-                        <div class="card-action">
-                         트레이딩 전략 삼중창 매매     {{name}}
-                        </div>        
+                        <h3 class="page-header">
+                            검색한 종목명 : {{name}}
+                        </h3>
                          <div class="card-content"> 
-							<p>내용을 입력해주세요.</p>
+
                             <img src="data:image/png;base64,{{ data }}" alt="" height="700" ,width="700">
-						   <div class="clearBoth"><br/></div>
-						    
+
 						 </div>
 						 </div>
-						 
-									
-				 <footer><p>Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
-</p></footer>
 				</div>
              <!-- /. PAGE INNER  -->
             </div>
