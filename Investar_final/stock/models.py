@@ -157,4 +157,4 @@ class Merge(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'merge'
+        db_table = 'MERGE'
