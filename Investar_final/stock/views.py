@@ -699,7 +699,7 @@ def triple(request):
 
 # 주식검색
 def search(request):
-    merges = Merge.objects.filter(date="2020-10-21").values('company', 'code', 'date', 'open', 'high', 'low', 'close',
+    merges = Merge.objects.filter(date="2020-09-21").values('company', 'code', 'date', 'open', 'high', 'low', 'close',
                                                             'diff', 'volume')
     context = {'merges': merges}
     return render(request, 'search.html', context)
