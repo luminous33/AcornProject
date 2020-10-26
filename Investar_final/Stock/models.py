@@ -8,22 +8,6 @@
 from django.db import models
 
 
-class Merge(models.Model):
-    company = models.CharField(max_length=40, blank=True, null=True)
-    code = models.CharField(max_length=20)
-    date = models.DateField()
-    open = models.BigIntegerField(blank=True, null=True)
-    high = models.BigIntegerField(blank=True, null=True)
-    low = models.BigIntegerField(blank=True, null=True)
-    close = models.BigIntegerField(blank=True, null=True)
-    diff = models.BigIntegerField(blank=True, null=True)
-    volume = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'MERGE'
-
-
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -58,7 +42,7 @@ class AuthUser(models.Model):
     last_login = models.DateTimeField(blank=True, null=True)
     is_superuser = models.IntegerField()
     username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=150)
+    first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=150)
     email = models.CharField(max_length=254)
     is_staff = models.IntegerField()
@@ -158,3 +142,19 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
+
+
+class Merge(models.Model):
+    company = models.CharField(max_length=40, blank=True, null=True)
+    code = models.CharField(max_length=20)
+    date = models.DateField()
+    open = models.BigIntegerField(blank=True, null=True)
+    high = models.BigIntegerField(blank=True, null=True)
+    low = models.BigIntegerField(blank=True, null=True)
+    close = models.BigIntegerField(blank=True, null=True)
+    diff = models.BigIntegerField(blank=True, null=True)
+    volume = models.BigIntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'MERGE'
